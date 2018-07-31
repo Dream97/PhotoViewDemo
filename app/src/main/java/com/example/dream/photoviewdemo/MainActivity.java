@@ -3,8 +3,11 @@ package com.example.dream.photoviewdemo;
 
 import android.media.Image;
 import android.net.Uri;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
@@ -12,43 +15,74 @@ import com.github.chrisbanes.photoview.PhotoView;
 public class MainActivity extends AppCompatActivity {
 
     private PhotoView photoView;
+    private ViewPager viewPager;
+    private MyViewPagerAdapter myViewPagerAdapter;
 
+    private String[] imglist = {
+            "https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=82f1640b19ce36d3bd0485300af23a24/fcfaaf51f3deb48f5510390ffc1f3a292cf578e2.jpg",
+            "https://ss0.baidu.com/7Po3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=ff6ed7cfa718972bbc3a06cad6cc7b9d/267f9e2f07082838304837cfb499a9014d08f1a0.jpg",
+            "https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=a537b312164c510fb1c4e41a50582528/b8389b504fc2d562a746bd37eb1190ef77c66c99.jpg",
+            "https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=56577be956afa40f23c6c8dd9b66038c/562c11dfa9ec8a1346809b3bfb03918fa1ecc057.jpg",
+            "https://ss3.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=a537b312164c510fb1c4e41a50582528/b8389b504fc2d562a746bd37eb1190ef77c66c99.jpg",
+            "https://ss0.baidu.com/94o3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=4a51c9cd7e8b4710d12ffbccf3ccc3b2/b64543a98226cffceee78e5eb5014a90f703ea09.jpg"
+    };
+    private LinearLayout points;
+    private int prePosition;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//
-        photoView =  findViewById(R.id.photoview);
-        ImageLoader.display(this,photoView,"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532892735280&di=3cd4c1ea2419b533d2fad526031eada4&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20160315%2Fmp63612250_1458050205554_8.jpeg");
-////
-////        mPhoto.disenable();
-////        mPhoto.setImageURI(Uri.parse("https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=f0f0a048fa03738dc14a0a228319b073/08f790529822720e45023d1277cb0a46f31fab0e.jpg"));
-////        mPhoto.setImageResource(R.drawable.image);
-////        mPhoto.setImageURI(Uri.parse("https://ss1.baidu.com/9vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=f0f0a048fa03738dc14a0a228319b073/08f790529822720e45023d1277cb0a46f31fab0e.jpg"));
-//        // 启用图片缩放功能
-//        photoView.enable();
-//// 禁用图片缩放功能 (默认为禁用，会跟普通的 ImageView 一样，缩放功能需手动调用 enable()启用)
-//        photoView.disenable();
-//// 获取图片信息
-//        Info info = photoView.getInfo();
-//// 从普通的 ImageView 中获取 Info
-////        Info info = PhotoView.getImageViewInfo(ImageView);
-//// 从一张图片信息变化到现在的图片，用于图片点击后放大浏览，具体使用可以参照 demo 的使用
-//        photoView.animaFrom(info);
-//// 从现在的图片变化到所给定的图片信息，用于图片放大后点击缩小到原来的位置，具体使用可以参照 demo 的使用
-//        photoView.animaTo(info,new Runnable() {
-//            @Override
-//            public void run() {
-//                //动画完成监听
-//            }
-//        });
-//// 获取/设置 动画持续时间
-//        photoView.setAnimaDuring(2000);
-//        int d = photoView.getAnimaDuring();
-//// 获取/设置 最大缩放倍数
-//        photoView.setMaxScale(15f);
-//        float maxScale = photoView.getMaxScale();
-//// 设置动画的插入器
-////        photoView.setInterpolator(Interpolator interpolator);
+        
+        initView();
+        initData();
+    }
+
+    private void initData() {
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float v, int i1) {
+                position = position % imglist.length;
+                //把前一个白变为黑
+                points.getChildAt(prePosition).setBackgroundResource(R.drawable.point_back);
+                //把当前白点变为红点
+                points.getChildAt(position).setBackgroundResource(R.drawable.point_white);
+                //记录下当前位置(当前位置变红后，赋值给前一个点)
+                prePosition = position;
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
+    }
+
+    private void initView() {
+        viewPager = findViewById(R.id.viewpager);
+        myViewPagerAdapter = new MyViewPagerAdapter(this,imglist);
+        viewPager.setAdapter(myViewPagerAdapter);
+        points = findViewById(R.id.points);
+        for(int i = 0;i<imglist.length;i++) {
+            //白点
+            //根据viewPager的数量，添加红点指示器
+            ImageView view = new ImageView(this);
+            view.setBackgroundResource(R.drawable.point_back);
+            //给点设置宽高
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(20, 20);
+            //给控件设置边距
+            params.leftMargin = 10;
+            //给view设置参数
+            view.setLayoutParams(params);
+            //将图片添加到线性布局中
+            points.addView(view);
+        }
+
+        points.getChildAt(0).setBackgroundResource(R.drawable.point_white);
+        viewPager.setCurrentItem(0);
     }
 }

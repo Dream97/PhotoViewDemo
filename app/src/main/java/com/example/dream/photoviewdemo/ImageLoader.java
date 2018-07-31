@@ -14,7 +14,6 @@ public class ImageLoader {
         GlideApp
                 .with(context)
                 .load(url)
-                .centerCrop()
                 .placeholder(R.drawable.timg)
                 .into(imageView);
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,24 +7,36 @@
     tools:context=".MainActivity">
 
     <!--<uk.co.senab.photoview.PhotoView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/photo_view" />-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:id="@+id/photo_view" />-->
     <!--<com.bm.library.PhotoView-->
+    <!--android:id="@+id/photoview"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:src="@drawable/timg"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--/>-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:background="#000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+        <!--<com.github.chrisbanes.photoview.PhotoView-->
         <!--android:id="@+id/photoview"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--android:src="@drawable/timg"-->
-        <!--android:scaleType="centerCrop"-->
         <!--/>-->
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/photoview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/timg"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="图片"/>
-</android.support.constraint.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_alignBottom="@+id/viewpager"
+            android:layout_marginBottom="30dp"
+            android:padding="5dp"></LinearLayout>
+</RelativeLayout>
