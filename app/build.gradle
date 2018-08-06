@@ -26,7 +26,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //photoView
-    implementation 'com.bm.photoview:library:1.4.1'
+//    implementation 'com.bm.photoview:library:1.4.1'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
 //    implementation 'com.zftlive.android.library:feature-android-imageloader:1.0.0'
     //glide

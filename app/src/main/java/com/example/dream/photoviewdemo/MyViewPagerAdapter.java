@@ -12,9 +12,6 @@ import android.widget.LinearLayout;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
-import org.xml.sax.ContentHandler;
-
-import java.util.zip.Inflater;
 
 public class MyViewPagerAdapter extends PagerAdapter{
     private String[] imgList;
