@@ -49,13 +49,13 @@ public class MyViewPagerAdapter extends PagerAdapter{
         ImageLoader.display(context,photoView,imgList[position]);
 
         //把图片添加到container中
-//        container.addView(imageView);
+        container.addView(photoView);
         //把图片返回给框架，用来缓存
-        ImageView imageView = new ImageView(context);
+//        ImageView imageView = new ImageView(context);
 //        imageView.setImageResource(R.drawable.timg);
-        ImageLoader.display(context,imageView,imgList[position]);
-        container.addView(imageView);
-        return imageView;
+//        ImageLoader.display(context,imageView,imgList[position]);
+//        container.addView(imageView);
+        return photoView;
     }
 
     //销毁条目
