@@ -6,10 +6,6 @@ import android.widget.ImageView;
 
 public class ImageLoader {
     public static void display(Context context, ImageView imageView,String url){
-//        Glide.with(context)
-//                .load(url)
-//                .placeholder(R.drawable.loading_spinner)
-//                .into(imageView);
         GlideApp
                 .with(context)
                 .load(url)

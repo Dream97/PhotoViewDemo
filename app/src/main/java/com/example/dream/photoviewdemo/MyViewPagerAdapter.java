@@ -1,14 +1,10 @@
 package com.example.dream.photoviewdemo;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
@@ -20,6 +16,7 @@ public class MyViewPagerAdapter extends PagerAdapter{
         this.imgList = imgList;
         this.context = context;
     }
+
 
     @Override
     public int getCount() {
@@ -37,13 +34,9 @@ public class MyViewPagerAdapter extends PagerAdapter{
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         //container  容器  相当于用来存放imageView
-        //从集合中获得图片
-//        int newPosition = position % 5; //数组中总共有5张图片，超过数组长度时，取摸，防止下标越界
-//        View view = LayoutInflater.from(context).inflate(R.layout.myimage,container);
 
         PhotoView photoView = new PhotoView(context);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(10, 10);
-//        photoView.setLayoutParams(new La);
+
         photoView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         ImageLoader.display(context,photoView,imgList[position]);
@@ -51,10 +44,6 @@ public class MyViewPagerAdapter extends PagerAdapter{
         //把图片添加到container中
         container.addView(photoView);
         //把图片返回给框架，用来缓存
-//        ImageView imageView = new ImageView(context);
-//        imageView.setImageResource(R.drawable.timg);
-//        ImageLoader.display(context,imageView,imgList[position]);
-//        container.addView(imageView);
         return photoView;
     }
 

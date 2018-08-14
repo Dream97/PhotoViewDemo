@@ -1,20 +1,14 @@
 package com.example.dream.photoviewdemo;
 
 
-import android.media.Image;
-import android.net.Uri;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.github.chrisbanes.photoview.PhotoView;
-
-
 public class MainActivity extends AppCompatActivity {
 
-    private PhotoView photoView;
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
 
@@ -44,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
                 position = position % imglist.length;
                 //把前一个白变为黑
                 points.getChildAt(prePosition).setBackgroundResource(R.drawable.point_back);
-                //把当前白点变为红点
+                //把当前白点变为黑点
                 points.getChildAt(position).setBackgroundResource(R.drawable.point_white);
-                //记录下当前位置(当前位置变红后，赋值给前一个点)
+                //记录下当前位置(当前位置变白后，赋值给前一个点)
                 prePosition = position;
             }
 
@@ -69,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         points = findViewById(R.id.points);
         for(int i = 0;i<imglist.length;i++) {
             //白点
-            //根据viewPager的数量，添加红点指示器
+            //根据viewPager的数量，添加白点指示器
             ImageView view = new ImageView(this);
             view.setBackgroundResource(R.drawable.point_back);
             //给点设置宽高
